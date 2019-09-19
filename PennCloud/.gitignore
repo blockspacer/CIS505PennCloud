@@ -1,0 +1,12 @@
+.project
+*.zip
+*.o
+cmake-build-debug/
+CMakeLists.txt
+.idea/
+*.grpc.ph.h
+*.ph.h
+/common/*.pb.*
+Load_Balancer/loadBalancer
+Admin_Console/views/*ServerData
+Admin_Console/adminConsole

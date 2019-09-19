@@ -1,0 +1,58 @@
+
+<div class='FWD'>
+        <div class="form-group">
+            <input type="submit" class="btn btn-md btn-primary btn-block" value="Send">
+        </div>
+    </form>
+</div>
+
+<div class='RPLY'>
+        <div class="form-group">
+            <input type="submit" class="btn btn-md btn-primary btn-block" value="Send">
+        </div>
+    </form>
+</div>
+
+<div id="showemail">
+    <div class='panel-body emailcontent center' >
+    </div>
+</div>
+
+<script language="javascript">
+    $("#newemail").on("click", function(){
+        $("#compose").fadeToggle();
+    });
+
+    $(document).ready(function(){
+        var next = 1;
+        $(".add-more").click(function(e){
+            e.preventDefault();
+            var addTo = "#field" + next;
+            var addRemove = "#field" + (next);
+            next ++ ;
+
+            var newIn = '<input id="field' + next + '" type="email" name="mailTo" placeholder="name@example.com">';
+            var newInput = $(newIn);
+            var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" style="margin-left:4px; ">-</button></div><div id="field">';
+            var removeButton = $(removeBtn);
+            $(addTo).after(newInput);
+            $(addRemove).after(removeButton);
+            $("#field" + next).attr('data-source',$(addTo).attr('data-source'));
+            $("#count").val(next);
+
+            $('.remove-me').click(function(e){
+                e.preventDefault();
+                var fieldNum = this.id.charAt(this.id.length-1);
+                var fieldID = "#field" + fieldNum;
+                $(this).remove();
+                $(fieldID).remove();
+            });
+        });
+    });
+
+</script>
+
+
+
+
+

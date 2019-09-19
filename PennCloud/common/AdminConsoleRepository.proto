@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package adminconsolerepository;
+
+/**
+ * A repository for retrieving information for the admin console.
+ */
+service AdminConsoleRepository {
+
+	/**
+	 * Get rows from the key-value store.
+	 */
+	rpc GetRows(GetRowsRequest) returns (stream BigTableRow) {}
+
+	/**
+	 * Get the row for a user.
+	 */
+	rpc GetRowForUser(GetUserRowRequest) returns (BigTableRow) {}
+
+	// TODO: add additional rpc methods as needed
+
+}
+
+message GetRowsRequest {
+	/** The number of rows to get. */
+	int64 count = 1;
+	/** The offset of where to start retrieving rows. */
+	int64 offset = 2;
+}
+
+message GetUserRowRequest {
+	/** The user for which to retrieve the row. */
+	string username = 1;
+}
+
+message File {
+	string username = 1;
+	string filename = 2;
+	string filetype = 3;
+	string disk_filename = 4;
+	int64 start = 5;
+	int64 filesize = 6;
+	bool is_flushed = 7;
+	bytes content = 8;
+}
+
+message BigTableRow {
+
+	/** The key for the row (i.e. the username). */
+	string key = 1;
+
+	/** The columns for the row. */
+	map<string, File> columns = 2;
+
+	// TODO: Determine what other fields to include here depending on how key value store is implemented
+}
+
+

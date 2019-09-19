@@ -1,0 +1,131 @@
+syntax = "proto3";
+
+package storagerepository;
+
+/**
+ * A repository for retrieving storage information.
+ */
+service StorageRepository {
+
+	/**
+	 * Get a file for a user.
+	 */
+	rpc GetFile(GetFileRequest) returns (FileDTO) {}
+
+	/**
+	 * Get all of the files in a folder for a user.
+	 */
+	rpc GetFilesByFolder(GetFileRequest) returns (stream FileDTO) {}
+
+	/**
+	 * Get names of all files/folders in a folder for a user.
+	 */
+	rpc GetFileList(GetFileRequest) returns (stream FileDTO) {}
+
+	/**
+	 * Add a file for a user.
+	 */
+	rpc AddFile(FileDTO) returns (AddFileResponse) {}
+
+	/**
+	 * Delete a file for a user.
+	 */
+	rpc DeleteFile(GetFileRequest) returns (AddFileResponse) {}
+
+	/**
+	 * Add a folder for a user.
+	 */
+	rpc AddFolder(FileDTO) returns (AddFileResponse) {}
+
+	/**
+	 * Delete a folder (including files and subfolders in it) for a user.
+	 */
+	rpc DeleteFolder(GetFileRequest) returns (AddFileResponse) {}
+
+	/**
+	 * Rename a file for a user.
+	 */
+	 rpc RenameFile(RenameFileRequest) returns (RenameFileResponse) {}
+
+	/**
+	 * Move a file into a specified folder for a user.
+	 */
+	 rpc MoveFile(MoveFileRequest) returns (MoveFileResponse) {}
+
+	/**
+	 * Rename a folder for a user.
+	 */
+	 rpc RenameFolder(RenameFileRequest) returns (RenameFileResponse) {}
+
+	
+	// TODO: add additional rpc methods as needed
+
+}
+
+message GetFileRequest {
+	/** The user name for which to retrieve a file. */
+	string userName = 1;
+	/** The name of the file to retrieve. */
+	string fileName = 2;
+}
+
+message AddFileResponse {
+	/** Whether the file was added successfully. */
+	bool success = 1;
+	/** A message with some relevant information (i.e. error message). */
+	string message = 2;
+}
+
+message RenameFileRequest {
+	/** The user name for which to rename a file. */
+	string userName = 1;
+	/** The old name of the file to rename. */
+	string oldName = 2;
+	/** The new name of the file. */
+	string newName = 3;
+	/** The uid of the file. */
+	string uid = 4;
+
+}
+
+message RenameFileResponse {
+	/** Whether the file was renamed successfully. */
+	bool success = 1;
+	/** A message with some relevant information (i.e. error message). */
+	string message = 2;
+}
+
+message MoveFileRequest {
+	/** The user name for which to move a file. */
+	string userName = 1;
+	/** The name of the file to move. */
+	string fileName = 2;
+	/** The name of the folder which the file goes to. **/
+	string folderName = 3;
+}
+
+message MoveFileResponse {
+	/** Whether the file was added successfully. */
+	bool success = 1;
+	/** A message with some relevant information (i.e. error message). */
+	string message = 2;
+}
+
+message FileDTO {
+	/** The username of the file owner */
+	string owner = 1;
+	/** The name of the file. */
+	string fileName = 2;
+	/** The uid of the file. */
+	string uid = 3;
+	/** The type of the file. */
+	string type = 4;
+	/** The file data. */
+	bytes data = 5;
+	/** The file size. */
+	int64 size = 6;
+	/** The last modified date. */
+	string time = 7;
+	//TODO: Add any other needed fields
+}
+

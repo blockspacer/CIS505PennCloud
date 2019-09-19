@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package server2master;
+
+import "MasterService.proto";
+
+/**
+ * A service for Server to master communication.
+ */
+service ServerToMaster {
+
+    /**
+    * Request a write operation
+    */
+	rpc AskForPrimary(PrimaryRequest) returns (masterservice.AddressDTO) {}
+
+}
+
+message PrimaryRequest {
+	int64 groupNum = 1;
+}
+

@@ -1,0 +1,79 @@
+syntax = "proto3";
+package masterservice;
+
+import "WriteService.proto";
+
+/**
+ * A service for FE servers to interact with the master server.
+ */
+service MasterService {
+
+	/**
+	 * Request a read at a BE server.
+	 */
+	rpc RequestRead(ReadRequest) returns (AddressDTO) {}
+
+
+    /**
+    * Request a write operation
+    */
+	rpc RequestWrite(WriteRequest) returns (WriteResponse) {}
+
+	/**
+	 * Request a list of files.
+	 */
+	 rpc RequestEmailList(FileListRequest) returns (stream MasterFileDTO) {}
+
+	/** Request the addresses that hold files for a given user. */
+	rpc RequestAddressesForFileList(FileListRequest) returns (stream AddressDTO);
+
+	/** Request the addresses of all the primary servers. */
+	rpc RequestAddressesForAllPrimaryServers(FileListRequest) returns (stream AddressDTO);
+
+}
+
+message FileListRequest {
+	/** The username to get the files for. */
+	string userName = 1;
+	/** The type of files to get. */
+	writeservice.FileType fileType = 2;
+}
+
+
+message ReadRequest {
+	/** The user name for which to retrieve emails. */
+	string userName = 1;
+	/** The uid of the email to retrieve. */
+	string uid = 2;
+}
+
+message AddressDTO {
+	/** The address of the BE server at which to request the read */
+	string address = 1;
+}
+
+message MasterFileDTO {
+	/** The username for the owner of the file. */
+	string userName = 1;
+	/** The uid of the file. */
+	string uid = 2;
+	/** The type of the file. */
+	writeservice.FileType fileType = 3;
+}
+
+message WriteRequest {
+	/** The user name for which to retrieve emails. */
+	string userName = 1;
+	/** The uid of the email to retrieve. */
+	string uid = 2;
+	/** The value to write */
+	bytes value = 3;
+	/** The type of write operation. */
+	writeservice.WriteType type = 4;
+	/** The type of file to write. */
+	writeservice.FileType fileType = 5;
+}
+
+message WriteResponse {
+	bool success = 1;
+}

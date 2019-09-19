@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package userrepository;
+
+/**
+ * A repository for retrieving user information.
+ */
+service UserRepository {
+
+	/**
+	 * Get a User's Account information.
+	 */
+	rpc GetUser(GetUserRequest) returns (UserDTO) {}
+
+	/**
+	 * Add a user.
+	 */
+	rpc CreateUser(UserDTO) returns (CreateUserResponse) {}
+
+	// TODO: add additional rpc methods as needed
+
+}
+
+message GetUserRequest {
+	/** The user name for which to retrieve user information. */
+	string userName = 1;
+}
+
+message UserDTO {
+	/** The username of the user */
+	string userName = 1;
+	/** The password of the user */
+	string password = 2;
+	/** The nickname of the user */
+	string nickName = 3;
+}
+
+message CreateUserResponse {
+	/** Whether the user was created successfully. */
+	bool success = 1;
+	/** Message that may contain relevant information (i.e. error message) */
+	string message = 2;
+
+}
+
+

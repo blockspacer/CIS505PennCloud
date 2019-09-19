@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package server2server;
+
+import "WriteService.proto";
+
+/**
+ * A service for Server to server communication.
+ */
+service ServerToServer {
+
+    /**
+    * Request a write operation
+    */
+	rpc AskForLog(LogRequest) returns (stream writeservice.WriteCommandRequest) {}
+
+}
+
+message LogRequest {
+	int64 sequenceNum = 1;
+}
+

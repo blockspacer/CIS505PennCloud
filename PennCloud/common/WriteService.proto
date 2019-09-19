@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package writeservice;
+
+/**
+ * A service for handling writes to the big table.
+ */
+service WriteService {
+
+    /**
+    * Request a write operation
+    */
+	rpc WriteCommand(WriteCommandRequest) returns (WriteCommandResponse) {}
+
+}
+
+enum WriteType {
+	PUT = 0;
+	DELETE = 1;
+	RENAME = 2;
+}
+
+enum FileType {
+	EMAIL = 0;
+	FILE = 1;
+	FOLDER = 2;
+	PASSWORD = 3;
+	ANY = 4;
+}
+
+message WriteCommandRequest {
+	/** The user name . */
+	string userName = 1;
+	/** The uid of the file. */
+	string uid = 2;
+	/** The value to write */
+	bytes value = 3;
+	/** The type of write operation. */
+	WriteType wType = 4;
+	/** The type of file on which operation takes place */
+	FileType fType = 5;
+	/** The replicas to forward this request to */
+	repeated string replicas = 6;
+	/** Operation Number */
+	int64 seqNum = 7;
+	/** New file name (use for move/rename) */
+	string newFileName = 8;
+}
+
+message WriteCommandResponse {
+	bool success = 1;
+}

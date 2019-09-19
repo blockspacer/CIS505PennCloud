@@ -1,0 +1,8 @@
+sample
+/server1
+bigtable
+SampleRpcServer.cc
+SMTP_external_to_bigtables
+/0_0_0_0_50051
+/0_0_0_0_50052
+master

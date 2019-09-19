@@ -1,0 +1,119 @@
+<div class = "container other">
+    <h1 style=" font-family: 'Frijole', sans-serif; text-align:center; margin-bottom:20px;">Penn Mail </h1>
+    <a id ="newemail" href='#'data-toggle="modal"  class="btn btn-md center-block btn-success" data-target="#modalCName">Compose New Email</a>
+
+    <div class="modal fade" id="modalCName" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Compose Email</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="send" method="POST" id="sendEmail">
+                        <div class="form-group">
+                            <h5>Email To</h5>
+                            <div id="field">
+                                <input id="field1" type="email"  name="mailTo" placeholder="name@example.com">
+                                <button id="b1" class="btn btn-success add-more"  type="button">+</button>
+                            </div>
+                            <!--<div id="field">-->
+                                <!--<button id="b1" class="btn btn-success add-more" style="display: inline-block;" type="button">+</button>-->
+                            <!--</div>-->
+                        </div>
+                        <div class="form-group">
+                            <h5>Email Title</h5>
+                            <input type="text" class="form-control" name="title" placeholder="Email Title">
+                        </div>
+                        <div class="form-group">
+                            <h5>Email Content</h5>
+                            <textarea class="form-control" name="content" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" form="sendEmail" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div id="compose">-->
+        <!--<div class="emailform">-->
+            <!--<form action="send" method="POST">-->
+                <!--<div class="form-group">-->
+                    <!--<h5>Email To</h5>-->
+                    <!--<input type="email" class="form-control" name="mailTo" placeholder="name@example.com">-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<h5>Email Title</h5>-->
+                    <!--<input type="text" class="form-control" name="title" placeholder="Email Title">-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<h5>Email Content</h5>-->
+                    <!--<textarea class="form-control" name="content" rows="3"></textarea>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<input type="submit" class="btn btn-md btn-primary btn-block" value="Send">-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div >
+        <table class = "table table-fix table-hover table-sm" style="margin-top:30px; background-color:#ffffff;
+                         border-radius: 5px;  padding: auto">
+            <thead>
+            <tr>
+                <th class="col-md-1 text-center">#</th> <th class="col-md-3 text-center"> Mail From </th> <th class="col-md-4 text-center"> Content </th>
+                <th class="col-md-3 text-center"> Date </th><th class="col-md-1 text-center"></th>
+            </tr>
+            </thead>
+            <tbody id="emails">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script language="javascript">
+    $("#newemail").on("click", function(){
+        $("#compose").fadeToggle();
+    });
+
+    $(document).ready(function(){
+        var next = 1;
+        $(".add-more").click(function(e){
+            e.preventDefault();
+            var addTo = "#field" + next;
+            var addRemove = "#field" + (next);
+            next ++ ;
+
+            var newIn = '<input id="field' + next + '" type="email" name="mailTo" placeholder="name@example.com">';
+            var newInput = $(newIn);
+            var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" style="margin-left:4px; ">-</button></div><div id="field">';
+            var removeButton = $(removeBtn);
+            $(addTo).after(newInput);
+            $(addRemove).after(removeButton);
+            $("#field" + next).attr('data-source',$(addTo).attr('data-source'));
+            $("#count").val(next);
+
+            $('.remove-me').click(function(e){
+                e.preventDefault();
+                var fieldNum = this.id.charAt(this.id.length-1);
+                var fieldID = "#field" + fieldNum;
+                $(this).remove();
+                $(fieldID).remove();
+            });
+        });
+    });
+
+
+</script>
+
+
+
+<!--var newIn = '<input autocomplete="off" class="input" id="field' + next + '" name="field' + next + '" type="text">';-->
+

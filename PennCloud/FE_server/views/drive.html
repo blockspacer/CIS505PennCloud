@@ -1,0 +1,91 @@
+<div class = "container other">
+    <h1 style="font-family: 'Frijole', sans-serif; text-align: center"> Penn Drive </h1>
+
+    <div class="container">
+        <div class='drivediv'>
+            <!--<form class = "upload" action="upload" method="POST" enctype="multipart/form-data">-->
+            <label class="custom-file">
+                <input type="file" name="file" id="file" class="custom-file-input">
+                <span class="custom-file-control"> </span>
+            </label>
+            <input class='hidden' name='method' value='UPLOAD'>
+            <input type="submit" name="submit" class="inline btn btn-md" value="UpLoad" />
+            </form>
+            <form class = "cfolder" action="" method= "POST">
+                <input class='hidden' name='method' value='CFOLDER'>
+                <input type="text" name="foldername" placeholder="  create folder">
+                <input type="submit" class="btn btn-md btn-primary" value="create!">
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 hidden-sm hidden-xs">
+                <div class="well no-padding">
+                    <div>
+                        <!--<ul class="treeview">-->
+                        <ul class="nav nav-list nav-menu-list-style">
+                            <li><label class="nav-header glyphicon-icon-rpad">Your Drive
+                                <span class='menu-collapsible-icon glyphicon glyphicon-chevron-down'></span></label>
+                                <ul class='nav nav-list tree bullets'>
+                                    <!--content goes here-->
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div >
+                    <table class = "table table-fix table-hover table-sm " style="background-color:#ffffff;
+                         border-radius: 5px;  padding: auto">
+                        <thead>
+                        <tr>
+                            <th class="col-md-1 text-center">#</th> <th class="col-md-2 text-center"> Name </th> <th class="col-md-1 text-center"> Type </th>
+                            <th class="col-md-2 text-center"> Size </th> <th class="col-md-1 text-center"> Move </th><th class="col-md-1 text-center"> Action</th>
+                            <th class="col-md-3 text-center"> Date </th>
+                        </tr>
+                        </thead>
+                        <tbody id='files'>
+                            <!--content goes here-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <a href='/home' class='btn btn-md btn-success'> Back to Home </a>
+        <button onclick='goBack()' class='btn btn-md btn-success'> Go Back </button>
+    </div>
+
+    <!--<div class="modal fade" id="modalCName" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+        <!--<div class="modal-dialog" role="document">-->
+            <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                    <!--<h5 class="modal-title" id="exampleModalLabel">Change file name</h5>-->
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                        <!--<span aria-hidden="true">&times;</span>-->
+                    <!--</button>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                    <!--<form style="text-align: center" method= "POST">-->
+                        <!--<input type="text" name="New Name" placeholder="new file name">-->
+                    <!--</form>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+<script language="javascript">
+    $('.tree-toggle').parent().children('ul.tree').toggle(20);
+    $('.tree-toggle').click(function(){
+        $(this).parent().children('ul.tree').toggle(200);
+    });
+    function goBack(){
+        window.history.back();
+    }
+</script>
+

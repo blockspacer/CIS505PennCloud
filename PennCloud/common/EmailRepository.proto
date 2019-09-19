@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package emailrepository;
+
+/**
+ * A repository for retrieving email information.
+ */
+service EmailRepository {
+
+	/**
+	 * Get a single email.
+	 */
+	rpc GetEmail(GetEmailRequest) returns (EmailDTO) {}
+
+	/**
+	 * Get all of the emails for a user.
+	 */
+	rpc GetAllEmails(GetEmailRequest) returns (stream EmailDTO) {}
+
+	/**
+	 * Get n emails, where n is specified by the count in the request.
+	 */
+	rpc GetNEmails(GetEmailRequest) returns (stream EmailDTO) {}
+
+    /**
+    * Delete
+    */
+	rpc DeleteEmail(GetEmailRequest) returns (EmailDTO) {}
+
+	/**
+	* SendEmail
+	* TODO: this call will SendEmail to the proper reciever
+	*/
+	rpc SendEmail(EmailDTO) returns (EmailDTO) {}
+}
+
+message GetEmailRequest {
+	/** The user name for which to retrieve emails. */
+	string userName = 1;
+	/** The uid of the email to retrieve. */
+	string uid = 2;
+	/** The number of emails to retrieve. */
+	int64 count = 3;
+	/** The offset of where to begin retrieving emails. */
+	int64 offset = 4;
+}
+
+message EmailDTO {
+	/** The uid (unique identifier) of the email */
+	string uid = 1;
+	/** The sender of the email */
+	string sender = 2;
+	/** The receiver of the email | newly added at Nov.22 yuding*/
+	string receiver = 3;
+	/** The date of the email. */
+	string date = 4;
+	/** The message of the email. */
+	string message = 5;
+	/** The subject of the email. */
+	string subject = 6;
+}

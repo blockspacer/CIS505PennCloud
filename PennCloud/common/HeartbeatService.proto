@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package heartbeatservice;
+
+/**
+ * A service for sending heartbeat messages between servers.
+ */
+service HeartbeatService {
+
+	/**
+	 * Send a heartbeat message.
+	 */
+	rpc heartbeat(HeartbeatRequest) returns (ServerStatusDTO) {}
+
+	/**
+	 * Kill a server process.
+	 */
+	 rpc killServer(Empty) returns (Empty) {}
+
+	// TODO: add additional rpc methods as needed
+
+}
+
+message HeartbeatRequest {
+
+}
+
+message Empty {
+
+}
+
+
+enum ServerStatus {
+	UNKNOWN = 0;
+	RUNNING = 1;
+	RECOVERING = 2;
+}
+
+message ServerStatusDTO {
+	/** The server's ip address. */
+	string ipAddress = 1;
+	/** The server's port. */
+	int32 port = 2;
+	/** The status of the server. */
+	ServerStatus status = 3;
+	/** The address:port on which the server listens for heartbeat messages. */
+	string heartbeatAddress = 4;
+	/** The group id of the server (used for backend servers) */
+	int64 groupId = 5;
+}
+
+
+
+
